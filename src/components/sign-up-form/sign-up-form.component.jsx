@@ -28,12 +28,14 @@ const SignUpForm = () => {
     }
     try {
       const { user } = await createAuthUserWithEmailAndPassword(email, password);
+
       await createUserDocumentFromAuth(user, { displayName });
+
       resetFormFields();
     } catch (e) {
-      if (e.code == 'auth/email-already-in-use') {
+      if (e.code === 'auth/email-already-in-use') {
         alert('email already in use');
-      } else if (e.code == 'auth/weak-password') {
+      } else if (e.code === 'auth/weak-password') {
         alert('weak password!');
       } else {
         console.log('user creation encountered error- ', e);

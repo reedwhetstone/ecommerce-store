@@ -1,11 +1,8 @@
 /** @format */
 import { useState } from 'react';
 import './sign-in-form.styles.scss';
-import {
-  signInAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-  signInWithGooglePopup,
-} from '../../utils/firebase/firebase.utils';
+import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from '../../utils/firebase/firebase.utils';
+
 import FormInput from '../../components/form-input/form-input.component';
 import Button from '../../components/button/button.component';
 
@@ -23,15 +20,14 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    await signInWithGooglePopup();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(email, password);
+      await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
     } catch (e) {
       alert(`user sign-in encountered error ${e.code}, ${e.message}`);

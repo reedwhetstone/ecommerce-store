@@ -1,9 +1,20 @@
 /** @format */
 
+import { useContext } from 'react';
+
+import { ProductsContext } from '../../contexts/products.context';
+
 const Shop = () => {
+  const { products } = useContext(ProductsContext);
+
   return (
     <div>
-      <h1>Shop Page</h1>
+      {products.map(({ id, name, imageUrl }) => (
+        <div key={id}>
+          <h1>{name}</h1>
+          <img src={imageUrl} />
+        </div>
+      ))}
     </div>
   );
 };
